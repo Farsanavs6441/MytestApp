@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function SearchScreen() {
+export default function NotificationsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Search</Text>
+      <Text style={styles.title}>Notifications</Text>
     </View>
   );
 }

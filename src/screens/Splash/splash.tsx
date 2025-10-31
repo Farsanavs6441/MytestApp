@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
+import ArrowIcon from '../../components/ArrowIcon';
 import styles from './styles';
+import { scale } from '../../utils/dimensions';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 type Props = {
@@ -27,7 +30,7 @@ export default function Splash({navigation}: Props) {
       </View>
       <TouchableOpacity
         style={styles.nextButton}
-        onPress={() => {}}
+        onPress={() => navigation.navigate('Login')}
         activeOpacity={0.8}
       >
         {/* Outer blue ring */}
@@ -36,7 +39,12 @@ export default function Splash({navigation}: Props) {
           <View style={styles.middleCircle}>
             {/* Inner blue circle */}
             <View style={styles.innerCircle} >
-            <Image source={require('../../assets/images/arrow.png')} style={styles.arrow} resizeMode="contain" />
+           <Image
+              source={require('../../assets/images/arrow.png')}
+              style={{ width: scale(20), height: scale(20) }}
+              resizeMode="contain"
+            />
+            
               </View>
             
           </View>

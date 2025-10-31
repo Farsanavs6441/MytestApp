@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { wp, hp, moderateScale } from '../../utils/dimensions';
+import Colors from '../../theme,/colors';
 
 const styles = StyleSheet.create({
   container: {
-   // flex: 1,
+    flex: 1,
     backgroundColor: '#FFFFFF',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -17,32 +18,36 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: 'flex-start',
     paddingStart: moderateScale(10),
+    marginTop: -moderateScale(10),
   },
   title: {
     fontSize: moderateScale(36),
+    fontFamily: Platform.select({ ios: 'SFProDisplay-ThinItalic', android: 'SFPRODISPLAYTHINITALIC' }),
     fontWeight: '400',
     color: '#111',
-    marginBottom: moderateScale(8),
+    marginBottom: moderateScale(10),
     paddingStart: moderateScale(15),
   },
   subtitle: {
     fontSize: moderateScale(16),
+    fontFamily: Platform.select({ ios: 'SFProDisplay-ThinItalic', android: 'SFPRODISPLAYTHINITALIC' }),
     color: '#000',
     textAlign: 'left',
     lineHeight: moderateScale(22),
      paddingStart: moderateScale(15),
+     marginBottom: moderateScale(100),
   },
   nextButton: {
     position: 'absolute',
-    bottom: -moderateScale(20),
-    right: moderateScale(20),
+    bottom: moderateScale(48),
+    right: moderateScale(30),
   },
   outerCircle: {
     width: moderateScale(75),
     height: moderateScale(75),
     borderRadius: moderateScale(37.5),
     borderWidth: moderateScale(3),
-    borderColor: '#007AFF', // outer blue outline
+    borderColor: Colors.primaryBlue, // outer blue outline
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
     width: moderateScale(60),
     height: moderateScale(60),
     borderRadius: moderateScale(30),
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.primaryBlue,
     alignItems:'center',
     justifyContent: 'center',
  // solid blue inner circle

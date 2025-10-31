@@ -11,16 +11,18 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import Splash from './src/screens/Splash/splash.tsx';
+import AppNavigator from './src/navigation';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
+    <View style={styles.container}>
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <AppContent />
     </SafeAreaProvider>
+    </View>
   );
 }
 
@@ -29,7 +31,7 @@ function AppContent() {
 
   return (
     <View style={styles.container}>
-    <Splash />
+    <AppNavigator />
     </View>
   );
 }
@@ -37,6 +39,8 @@ function AppContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
+
   },
 });
 
