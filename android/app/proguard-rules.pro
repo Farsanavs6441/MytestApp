@@ -8,3 +8,11 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+ 
+# Keep react-native-vector-icons classes and resources
+-keep class com.oblador.vectoricons.** { *; }
+-keepclassmembers class com.oblador.vectoricons.** { *; }
+
+# Keep React Native text classes to avoid glyph issues
+-keep class com.facebook.react.views.text.** { *; }
+-keepclassmembers class com.facebook.react.views.text.** { *; }
