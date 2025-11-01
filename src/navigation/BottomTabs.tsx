@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Image, Platform } from 'react-native';
+import { Image, Platform, Text } from 'react-native';
 import HomeScreen from '../screens/Home/HomeScreen';
 // Messages tab shows the NotificationsScreen.js content (which has messages)
 import MessagesScreen from '../screens/Notifications/NotificationsScreen';
@@ -33,13 +33,18 @@ export default function BottomTabs() {
           shadowRadius: 6,
           elevation: 3,
         },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '500',
+          marginTop: 2,
+        },
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: ({ focused }) => (focused ? 'Home' : ''),
+          tabBarLabel: ({ focused }) => focused ? <Text style={{fontSize: 12, fontWeight: '500', color: Colors.primaryBlue}}>Home</Text> : null,
           tabBarIcon: ({ color, focused }) => (
             <Icon name={focused ? 'home' : 'home-outline'} size={24} color={color} />
           ),
@@ -49,7 +54,7 @@ export default function BottomTabs() {
         name="Messages"
         component={MessagesScreen}
         options={{
-          tabBarLabel: ({ focused }) => (focused ? 'Messages' : ''),
+          tabBarLabel: ({ focused }) => focused ? <Text style={{fontSize: 12, fontWeight: '500', color: Colors.primaryBlue}}>Messages</Text> : null,
           tabBarIcon: ({ color, focused }) => (
             <Icon name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'} size={24} color={color} />
           ),
@@ -59,9 +64,9 @@ export default function BottomTabs() {
         name="Notifications"
         component={NotificationsTabScreen}
         options={{
-          tabBarLabel: ({ focused }) => (focused ? 'Notifications' : ''),
+          tabBarLabel: ({ focused }) => focused ? <Text style={{fontSize: 12, fontWeight: '500', color: Colors.primaryBlue}}>Notifications</Text> : null,
           tabBarIcon: ({ color, focused }) => (
-            <Icon name={focused ? 'notifications' : 'notifications-outline'} size={24} color={color} />
+            <Icon name={focused ? 'notifications' : 'pie-chart-outline'} size={24} color={color} />
           ),
         }}
       />
@@ -69,9 +74,9 @@ export default function BottomTabs() {
         name="Search"
         component={SearchScreen}
         options={{
-          tabBarLabel: ({ focused }) => (focused ? 'Search' : ''),
+          tabBarLabel: ({ focused }) => focused ? <Text style={{fontSize: 12, fontWeight: '500', color: Colors.primaryBlue}}>Search</Text> : null,
           tabBarIcon: ({ color, focused }) => (
-            <Icon name={focused ? 'search' : 'search-outline'} size={24} color={color} />
+            <Icon name={focused ? 'wallet' : 'wallet-outline'} size={24} color={color} />
           ),
         }}
       />
@@ -79,7 +84,7 @@ export default function BottomTabs() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: ({ focused }) => (focused ? 'Profile' : ''),
+          tabBarLabel: ({ focused }) => focused ? <Text style={{fontSize: 12, fontWeight: '500', color: Colors.primaryBlue}}>Profile</Text> : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('../assets/images/profile.png')}

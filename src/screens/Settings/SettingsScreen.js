@@ -7,10 +7,12 @@ import {
   Switch,
   TouchableOpacity,
   SafeAreaView,
+  StatusBar,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
-;
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import { wp, hp, scale, verticalScale, moderateScale, SCREEN_HEIGHT } from '../../utils/dimensions';
 import Colors from '../../theme,/colors';
@@ -21,33 +23,36 @@ const ProfileScreen = () => {
   const [fingerprintEnabled, setFingerprintEnabled] = React.useState(false);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Gradient Background */}
-      <LinearGradient
-        colors={['#E9EEFF', '#FFFFFF']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-        style={styles.fullGradient}
-      >
-        {/* Gradient Header Section */}
-        <View style={styles.gradientContainer}>
-          {/* Header */}
-          <View style={styles.header}>
-            <View style={styles.headerLeft}>
+    <>
+      <StatusBar backgroundColor="#E9EEFF" barStyle="dark-content" />
+      <SafeAreaView style={styles.container}>
+        <LinearGradient
+          colors={['#E9EEFF', '#FFFFFF']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={styles.fullGradient}
+        >
+          {/* Gradient Header Section */}
+          <View style={styles.gradientContainer}>
+            {/* Header */}
+            <View style={styles.header}>
+              <View style={styles.headerLeft}>
+                <TouchableOpacity style={styles.navButton}>
+                  <Icon name="chevron-back" size={22} color="#000" />
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>Profile</Text>
+              </View>
               <TouchableOpacity style={styles.navButton}>
-                <Icon name="chevron-back" size={22} color="#000" />
+                <Icon name="chevron-forward" size={22} color="#000" />
               </TouchableOpacity>
-              <Text style={styles.headerTitle}>Profile</Text>
             </View>
-            <TouchableOpacity style={styles.navButton}>
-              <Icon name="chevron-forward" size={22} color="#000" />
-            </TouchableOpacity>
           </View>
-</View>
-      </LinearGradient>
 
-      {/* Profile Card */}
-      <View style={styles.profileCard}>
+          {/* Profile Content */}
+          <View style={{borderTopLeftRadius:25, borderTopRightRadius:25, flex:1, backgroundColor:'#FFFFFF', paddingTop:16}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={{height:hp(2)}}></View>
+              <View style={styles.profileCard}>
         <View style={styles.avatarWrapper}>
           <Image
             source={require('../../assets/images/profile.png')} // replace with your avatar image
@@ -88,12 +93,14 @@ const ProfileScreen = () => {
           <Text style={styles.securityTitle}>Security</Text>
 
           <View style={styles.switchRow}>
-            <View>
+            <View style={styles.switchTextContainer}>
               <View style={styles.switchLabelRow}>
                 <IconCard iconName="face-man" />
                 <Text style={styles.switchLabel}>Face ID</Text>
               </View>
-              <Text style={styles.switchSubtext}>Use Face ID to unlock the app</Text>
+              <View style={styles.subtextContainer}>
+                <Text style={styles.switchSubtext}>Use Face ID to unlock the app</Text>
+              </View>
             </View>
             <Switch
               trackColor={{ false: '#ccc', true: Colors.primaryBlue }}
@@ -104,12 +111,14 @@ const ProfileScreen = () => {
           </View>
 
           <View style={styles.switchRow}>
-            <View>
+            <View style={styles.switchTextContainer}>
               <View style={styles.switchLabelRow}>
                 <IconCard iconName="fingerprint" />
                 <Text style={styles.switchLabel}>Fingerprint</Text>
               </View>
-              <Text style={styles.switchSubtext}>Use Fingerprint to unlock the app</Text>
+              <View style={styles.subtextContainer}>
+                <Text style={styles.switchSubtext}>Use Fingerprint to unlock the app</Text>
+              </View>
             </View>
             <Switch
               trackColor={{ false: '#ccc', true: Colors.primaryBlue }}
@@ -119,11 +128,12 @@ const ProfileScreen = () => {
             />
           </View>
         </View>
-      </View>
-
-      {/* Bottom Navigation */}
-   
-    </SafeAreaView>
+              </View>
+            </ScrollView>
+          </View>
+        </LinearGradient>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -132,28 +142,14 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
-  },
-//   gradientContainer: {
-//     height: SCREEN_HEIGHT * 0.2, // 1/5th of screen height
-//     //paddingHorizontal: wp(5),
-//   //  paddingTop: hp(2),
-//    // borderBottomLeftRadius: 25,
-//     //borderBottomRightRadius: 25,
-//   },
- safeArea: {
-    flex: 1,
+    backgroundColor: '#E9EEFF',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   fullGradient: {
-  //  flex: 1,
+    flex: 1,
   },
   gradientContainer: {
-    height: SCREEN_HEIGHT * 0.15, // 1/5th of screen height
-  //  paddingHorizontal: 16,
-   // paddingTop: 10,
-    //paddingBottom: 20,
-    //borderBottomLeftRadius: 25,
-   // borderBottomRightRadius: 25,
+    height: SCREEN_HEIGHT * 0.15,
   },
   header: {
     marginTop: 10,
@@ -179,16 +175,9 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
   },
   profileCard: {
-    backgroundColor: '#fff',
-   // margin: wp(5),
-    borderTopLeftRadius: scale(25),
-    borderTopRightRadius: scale(25),
+    backgroundColor: 'transparent',
     paddingVertical: hp(3),
     paddingHorizontal: wp(5),
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 3,
   },
   avatarWrapper: {
     alignSelf: 'center',
@@ -221,13 +210,13 @@ const styles = StyleSheet.create({
     marginLeft: wp(3),
   },
   label: {
-    fontSize: moderateScale(14),
-    color: '#000',
-    fontWeight: '600',
+    fontSize: moderateScale(16),
+    color: '#222',
+    fontWeight: '400',
   },
   value: {
     fontSize: moderateScale(13),
-    color: '#888',
+    color: '#AeAeb2',
   },
   securitySection: {
     marginTop: hp(3),
@@ -249,15 +238,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   switchLabel: {
-    fontSize: moderateScale(14),
-    fontWeight: '500',
+    fontSize: moderateScale(16),
+    fontWeight: '400',
     marginLeft: wp(2),
     color: '#000',
   },
+  switchTextContainer: {
+    flex: 1,
+  },
+  subtextContainer: {
+    marginLeft: wp(12),
+  },
   switchSubtext: {
-    fontSize: moderateScale(12),
-    color: '#8C8C8C',
-    marginLeft: wp(6),
+    fontSize: moderateScale(13),
+    color: '#aeaeb2',
+    fontWeight: '400',
   },
   bottomNav: {
     position: 'absolute',

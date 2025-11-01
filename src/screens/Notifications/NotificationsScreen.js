@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -73,7 +75,7 @@ const messages = [
     title: 'Credit Union Alliance',
     description: 'Monthly statement is now available for review.',
     time: '9:15 AM',
-    date: 'December 10, 2024',
+    date: '12/10/2024',
     dateKey: '2024-12-10',
     image: require('../../assets/images/msg1.png'),
     statusColor: '#FFA726',
@@ -83,7 +85,7 @@ const messages = [
     title: 'Financial Advisory Team',
     description: 'Reminder: Your payment is due in 3 days.',
     time: '2:20 PM',
-    date: 'December 10, 2024',
+    date: '12/10/2024',
     dateKey: '2024-12-10',
     image: require('../../assets/images/msg1.png'),
     statusColor: '#9E9E9E',
@@ -139,7 +141,8 @@ const MessagesScreen = () => {
 
   return (
     <>
-    <SafeAreaView style={styles.safeArea}>
+      <StatusBar backgroundColor="#E9EEFF" barStyle="dark-content" />
+      <SafeAreaView style={styles.safeArea}>
       <LinearGradient
         colors={['#E9EEFF', '#FFFFFF']}
         start={{ x: 0, y: 0 }}
@@ -160,18 +163,20 @@ const MessagesScreen = () => {
               <Icon name="chevron-forward" size={22} color="#000" />
             </TouchableOpacity>
           </View>
-
-          {/* Search Bar */}
-          <View style={styles.searchBar}>
-            <Icon name="search-outline" size={18} color="#aaa" />
-            <TextInput
-              placeholder="Search your messages"
-              placeholderTextColor="#aaa"
-              style={styles.searchInput}
-            />
-          </View>
         </View>
-        <View style={{borderTopLeftRadius:25, borderTopRightRadius:25, flex:1, backgroundColor:'#FFFFFF', paddingTop:16}}>
+        {/* Search Bar - Outside gradient */}
+       
+        <View style={{borderTopLeftRadius:25, borderTopRightRadius:25, flex:1, backgroundColor:'#FFFFFF', paddingTop:16,}}>
+          <View style={{height:hp(2)}}></View>
+           <View style={styles.searchBar}>
+          <TextInput
+            placeholder="Search your messages"
+            placeholderTextColor="#aaa"
+            style={styles.searchInput}
+          />
+          <Icon name="search" size={18} color="#aaa" />
+        </View>
+        
           {/* Message List */}
           <FlatList
             data={sections}
@@ -197,6 +202,8 @@ const MessagesScreen = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: '#E9EEFF',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   fullGradient: {
     flex: 1,
@@ -236,16 +243,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    marginTop: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-    width: SCREEN_WIDTH * 0.85,
-    alignSelf: 'center'
+    borderRadius: 30,
+    paddingHorizontal: SCREEN_WIDTH * 0.04,
+    paddingVertical: hp(1.5),
+    borderWidth: 0.5,
+    borderColor: '#d1d1d1',
+    marginBottom: hp(1),
+    marginHorizontal: SCREEN_WIDTH * 0.075,
+    zIndex: 1,
   },
   searchInput: {
     flex: 1,
