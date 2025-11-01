@@ -20,8 +20,8 @@ import CreditScoreGauge from './CreditGaugeScore';
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const HomeScreen = () => {
-  const [selectedScore, setSelectedScore] = useState(704);
-  const [selectedLabel, setSelectedLabel] = useState('Apr');
+  const [selectedScore, setSelectedScore] = useState(830);
+  const [selectedLabel, setSelectedLabel] = useState('May');
 
 
 
@@ -87,12 +87,12 @@ const HomeScreen = () => {
      
         {/* Range Section */}
         <View style={styles.rangeContainer}>
-          <Text style={styles.rangeValue}>400</Text>
+          <Text style={styles.rangeValue}>850</Text>
           <View style={styles.dateContainer}>
             <Icon name="calendar-outline" size={14} color="#888" />
             <Text style={styles.updateText}> update on 02 {selectedLabel || 'Oct'} 2024</Text>
           </View>
-          <Text style={styles.rangeValue}>850</Text>
+          <Text style={styles.rangeValue}>400</Text>
         </View>
       </View>
 
@@ -121,30 +121,30 @@ const HomeScreen = () => {
         <LineChart
         data={data}
         curved
-        thickness={3}
+        thickness={2}
         color={Colors.primaryBlue}
-        hideDataPoints={false}
-        dataPointsColor={Colors.primaryBlue}
-        dataPointsRadius={4}
+       hideDataPoints={false} // keep false for interactivity
+  dataPointsColor="transparent" // invisible points
+  dataPointsRadius={10}
         startFillColor="transparent"
         endFillColor="transparent"
-        //hideRules
+        hideRules
         yAxisThickness={0}
         xAxisColor="transparent"
         xAxisLabelTextStyle={{ color: '#6666', fontSize: 11 }}
         initialSpacing={20}
         spacing={40}
         noOfSections={4}
-        maxValue={850}
-        minValue={650}
+        maxValue={900}
+        minValue={200}
         xAxisLabelTexts={data.map(item => item.label)}
-        yAxisLabelTexts={['650', '700', '750', '800', '850']}
+        yAxisLabelTexts={['200', '400', '600', '800', '900']}
         yAxisTextStyle={{ color: '#6666', fontSize: 11 }}
         backgroundColor="white"
         onPress={(item) => handleSelect(item)}
-        rulesType="solid"
-  rulesColor="#E0E0E0"
-  rulesThickness={1}
+//         rulesType="solid"
+//   rulesColor="#E0E0E0"
+//   rulesThickness={1}
       />
 </View> 
       </ScrollView>
